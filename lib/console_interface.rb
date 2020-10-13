@@ -25,7 +25,7 @@ class ConsoleInterface
   end
 
   def figure
-    return FIGURES[@game.errors_made]
+    FIGURES[@game.errors_made]
   end
 
   def word_to_show
@@ -42,12 +42,11 @@ class ConsoleInterface
   end
 
   def errors_to_show
-    return @game.errors.join(', ')
+    @game.errors.join(', ')
   end
 
   def get_input
     print "Введите следующую букву: "
     letter = gets[0].upcase
-    return letter
   end
 end
