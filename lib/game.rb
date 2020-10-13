@@ -30,8 +30,7 @@ class Game
     case letter
     when "Ё" then return "Е"
     when "Й" then return "И"
-    else
-      letter
+    else letter
     end
   end
 
