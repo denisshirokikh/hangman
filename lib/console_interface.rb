@@ -29,6 +29,7 @@ class ConsoleInterface
   end
 
   def word_to_show
+    result =
       @game.letters_to_guess.map do |letter|
         if letter == nil
           "__"
