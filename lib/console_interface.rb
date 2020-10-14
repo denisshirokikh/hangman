@@ -31,7 +31,7 @@ class ConsoleInterface
   def word_to_show
     result =
       @game.letters_to_guess.map do |letter|
-        if letter == nil
+        if letter.nil?
           "__"
         else
           letter
@@ -47,6 +47,6 @@ class ConsoleInterface
 
   def get_input
     print "Введите следующую букву: "
-    gets[0].upcase
+    STDIN.gets[0].upcase
   end
 end
