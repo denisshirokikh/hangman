@@ -47,6 +47,6 @@ class ConsoleInterface
 
   def get_input
     print "Введите следующую букву: "
-    gets[0].upcase
+    STDIN.gets[0].upcase
   end
 end

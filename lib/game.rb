@@ -7,7 +7,7 @@ class Game
   end
 
   def errors
-    @user_guesses - normalized_letters(@letters)
+    @user_guesses - normalized_letters
   end
 
   def errors_made
@@ -19,25 +19,24 @@ class Game
   end
 
   def letters_to_guess
-    @letters.map { |letter| letter if @user_guesses.include?(normalized_letter(letter)) }
+    @letters.map do |letter|
+      letter if @user_guesses.include?(normalize_letter(letter))
+    end
   end
 
   def lost?
-    errors_allowed == 0
+    errors_allowed.zero?
   end
 
-  def normalized_letter(letter)
-    case letter
-    when "Ё" then return "Е"
-    when "Й" then return "И"
-    else letter
-    end
+  def normalize_letter(letter)
+    return 'И' if letter == 'Й'
+    return 'Е' if letter == 'Ё'
+
+    letter
   end
 
-  def normalized_letters(letters)
-    letters.map do |letter|
-      normalized_letter(letter)
-    end
+  def normalized_letters
+    @letters.map(&method(:normalize_letter))
   end
 
   def over?
@@ -45,13 +44,13 @@ class Game
   end
 
   def play!(letter)
-    if !over? && !normalized_letters(@user_guesses).include?(normalized_letter(letter))
-      @user_guesses << letter
+    unless over? || @user_guesses.include?(normalize_letter(letter))
+      @user_guesses << normalize_letter(letter)
     end
   end
 
   def won?
-    (normalized_letters(@letters) - @user_guesses).empty?
+    (normalized_letters - @user_guesses).empty?
   end
 
   def word
